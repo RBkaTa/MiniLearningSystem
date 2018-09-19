@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniLearningSystem", "MiniLearningSystem\MiniLearningSystem.csproj", "{89383524-F413-4284-9811-346097EACDA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniLearningSystem.Web", "MiniLearningSystem\MiniLearningSystem.Web.csproj", "{89383524-F413-4284-9811-346097EACDA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniLearningSystem.Models", "MiniLearningSystem.Models\MiniLearningSystem.Models.csproj", "{FA55EB94-7624-4B22-9704-C7770B0ACE25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniLearningSystem.Data", "MiniLearningSystem.Data\MiniLearningSystem.Data.csproj", "{815E88EF-617A-4FA7-B7D9-2C274E6CE65F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniLearningSystem.Services", "MiniLearningSystem.Services\MiniLearningSystem.Services.csproj", "{9CBE439E-AB4E-4293-9DEC-A14AE6C89E86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{89383524-F413-4284-9811-346097EACDA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89383524-F413-4284-9811-346097EACDA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89383524-F413-4284-9811-346097EACDA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA55EB94-7624-4B22-9704-C7770B0ACE25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA55EB94-7624-4B22-9704-C7770B0ACE25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA55EB94-7624-4B22-9704-C7770B0ACE25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA55EB94-7624-4B22-9704-C7770B0ACE25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{815E88EF-617A-4FA7-B7D9-2C274E6CE65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{815E88EF-617A-4FA7-B7D9-2C274E6CE65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{815E88EF-617A-4FA7-B7D9-2C274E6CE65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{815E88EF-617A-4FA7-B7D9-2C274E6CE65F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CBE439E-AB4E-4293-9DEC-A14AE6C89E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CBE439E-AB4E-4293-9DEC-A14AE6C89E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CBE439E-AB4E-4293-9DEC-A14AE6C89E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CBE439E-AB4E-4293-9DEC-A14AE6C89E86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
