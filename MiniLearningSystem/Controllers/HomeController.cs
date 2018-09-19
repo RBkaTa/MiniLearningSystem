@@ -1,4 +1,6 @@
-﻿using MiniLearningSystem.Services;
+﻿using MiniLearningSystem.Models.ViewModels.Course;
+using MiniLearningSystem.Services;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace MiniLearningSystem.Controllers
@@ -13,10 +15,17 @@ namespace MiniLearningSystem.Controllers
         }
 
         public ActionResult Index()
-        {
-            var courses = _courseService.GetAll();
+        {   
+            var courses = _courseService.GetAll().Select(c => new CourseIndexVm()
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                StartDate = c.StartDate,
+                EndDate = c.EndDate
+            }).ToList();
 
-            return View();
+            return View(courses);
         }
 
         public ActionResult About()

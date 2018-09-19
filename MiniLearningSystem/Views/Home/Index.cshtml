@@ -1,31 +1,114 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using MiniLearningSystem.Models.ViewModels.Course
+@model IEnumerable<CourseIndexVm>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<style>
+    div#row {
+        font-size: 18px;
+        line-height: 1.3em;
+        vertical-align: top;
+        margin-bottom: 1em;
+        border-radius: 0.5em;
+        padding: 1em;
+        box-sizing: border-box;
+        width: 45%;
+    }
+</style>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<h2>Index</h2>
+
+@if (TempData["CourseCreated"] != null)
+{
+    <div class="alert alert-success" id="Success" role="alert">
+        @TempData["CourseCreated"]
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+}
+
+
+@if (this.Context.User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "CreateCourse", "Admin", new { area = "Admin" }, null)
+    </p>
+}
+
+@if (Model is null)
+{
+    <h3> There isn't any Courses !</h3>
+}
+else
+{
+    <table class="table table-striped" style="border-spacing: 15px 9rem;">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (CourseIndexVm item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (!item.IsApplyed)
+                            {
+                                <button type="button" class="btn btn-success" style="margin-bottom:4px">
+                                    @Html.ActionLink("Apply", "AddStudent", "Course", new { courseId = item.Id }, new { Id = item.Id, area = "", style = "color:black;" })
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-danger" style="margin-bottom:4px">
+                                    @*<a area="" href="/Course/RemoveStudent/@item.Id" id="3" style="color:black">Cancel</a>*@
+                                    @Html.ActionLink("Cancel", "RemoveStudent", "Course", new { courseId = item.Id }, new { courseId = item.Id, area = "", style = "color:black;" })
+                                </button>
+                            }
+                        }
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+
+                        <button class="btn btn-info">
+                            @*<a area="" href="/Course/Details/@item.Id" id="4" style="color:black">Details</a>*@
+                            @Html.ActionLink("Details", "Details", "Course", new { id = item.Id }, new { id = item.Id, area = "", style = "color:black;" })
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<script>
+    (function () {
+        $("#Success").delay(2000).fadeOut(2000);
+    })()
+</script>
