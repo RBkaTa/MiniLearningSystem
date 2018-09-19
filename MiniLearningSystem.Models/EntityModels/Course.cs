@@ -16,7 +16,7 @@ namespace MiniLearningSystem.Models.EntityModels
 
         public string Description { get; set; }
 
-        public int TrainerId { get; set; }
+        public string TrainerId { get; set; }
         public ApplicationUser Trainer { get; set; }
 
         public DateTime StartDate { get; set; }

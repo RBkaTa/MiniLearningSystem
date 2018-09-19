@@ -282,6 +282,10 @@
       <Project>{FA55EB94-7624-4B22-9704-C7770B0ACE25}</Project>
       <Name>MiniLearningSystem.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MiniLearningSystem.Services\MiniLearningSystem.Services.csproj">
+      <Project>{9CBE439E-AB4E-4293-9DEC-A14AE6C89E86}</Project>
+      <Name>MiniLearningSystem.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
