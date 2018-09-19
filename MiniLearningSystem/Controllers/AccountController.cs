@@ -6,6 +6,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MiniLearningSystem.Models;
+using MiniLearningSystem.Models.EntityModels;
+using MiniLearningSystem.Models.ViewModels.Account;
 
 namespace MiniLearningSystem.Controllers
 {
