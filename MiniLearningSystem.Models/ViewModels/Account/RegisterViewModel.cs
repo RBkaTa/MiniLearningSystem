@@ -1,9 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MiniLearningSystem.Models.ViewModels.Account
 {
     public class RegisterViewModel
     {
+        [Required]
+        public string Username { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -14,10 +21,9 @@ namespace MiniLearningSystem.Models.ViewModels.Account
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        
+        [Required]
+        [Display(Name = "Birth Date")]
+        public DateTime BirthDate { get; set; }
     }
 }

@@ -150,7 +150,7 @@ namespace MiniLearningSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { Name = model.Name, UserName = model.Username, Email = model.Email, BirthDate = model.BirthDate };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
