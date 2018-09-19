@@ -5,7 +5,6 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using MiniLearningSystem.Models;
 using MiniLearningSystem.Models.ViewModels.Manage;
 
 namespace MiniLearningSystem.Controllers
