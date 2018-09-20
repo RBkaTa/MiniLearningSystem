@@ -1,4 +1,6 @@
-﻿using MiniLearningSystem.Models.ViewModels.Course;
+﻿using AutoMapper;
+using MiniLearningSystem.Models.EntityModels;
+using MiniLearningSystem.Models.ViewModels.Course;
 using MiniLearningSystem.Services;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,7 @@ namespace MiniLearningSystem.Controllers
         {
             _courseService = new CourseService();
         }
-        
+
         public ActionResult Index()
         {
             IList<CourseIndexVm> courses = null;
@@ -25,15 +27,8 @@ namespace MiniLearningSystem.Controllers
             }
             else
             {
-                courses = _courseService.GetAll().Select(c => new CourseIndexVm()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Description = c.Description,
-                    StartDate = c.StartDate,
-                    EndDate = c.EndDate
-                }).ToList();
-                
+                courses = Mapper.Map<ICollection<Course>, IList<CourseIndexVm>>(_courseService.GetAll());
+
             }
 
             return View(courses);

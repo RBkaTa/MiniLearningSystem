@@ -5,6 +5,7 @@ using System.Linq;
 using MiniLearningSystem.Models.ViewModels.Course;
 using System;
 using System.Web;
+using AutoMapper;
 
 namespace MiniLearningSystem.Services
 {
@@ -25,15 +26,8 @@ namespace MiniLearningSystem.Services
 
             using (this.Context)
             {
-                var courses = this.Context.Courses.Include(c => c.Trainer).Include(c => c.Students).Select(c => new CourseIndexVm()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Description = c.Description,
-                    StartDate = c.StartDate,
-                    EndDate = c.EndDate
-                }).ToList();
-
+                var courses = Mapper.Map<ICollection<Course>, IList<CourseIndexVm>>(this.Context.Courses.Include(c => c.Trainer).Include(c => c.Students).ToList());
+                
                 var student = this.Context.Students.Include(s => s.Courses).Include(s => s.User).SingleOrDefault(s => s.User.UserName == userName);
 
                 for (int i = 0; i < courses.Count; i++)
