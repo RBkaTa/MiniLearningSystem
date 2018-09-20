@@ -330,3 +330,5 @@ ASALocalRun/
 .mfractor/
 
 ConnectionInfo.cs
+
+Migrations/
