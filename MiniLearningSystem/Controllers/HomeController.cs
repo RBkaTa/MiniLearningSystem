@@ -2,6 +2,7 @@
 using MiniLearningSystem.Models.EntityModels;
 using MiniLearningSystem.Models.ViewModels.Course;
 using MiniLearningSystem.Services;
+using MiniLearningSystem.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -10,11 +11,11 @@ namespace MiniLearningSystem.Controllers
 {
     public class HomeController : Controller
     {
-        private CourseService _courseService;
+        private ICourseService _courseService;
 
-        public HomeController()
+        public HomeController(ICourseService courseService)
         {
-            _courseService = new CourseService();
+            _courseService = courseService;
         }
 
         public ActionResult Index()

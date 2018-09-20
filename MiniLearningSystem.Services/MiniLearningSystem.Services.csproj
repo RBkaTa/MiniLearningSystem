@@ -65,6 +65,9 @@
     <Compile Include="AccountService.cs" />
     <Compile Include="AdminService.cs" />
     <Compile Include="CourseService.cs" />
+    <Compile Include="Interfaces\IAccountService.cs" />
+    <Compile Include="Interfaces\IAdminService.cs" />
+    <Compile Include="Interfaces\ICourseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.cs" />
   </ItemGroup>

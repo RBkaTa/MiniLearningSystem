@@ -2,17 +2,18 @@
 using MiniLearningSystem.Models.EntityModels;
 using MiniLearningSystem.Models.ViewModels.Course;
 using MiniLearningSystem.Services;
+using MiniLearningSystem.Services.Interfaces;
 using System.Web.Mvc;
 
 namespace MiniLearningSystem.Web.Controllers
 {
     public class CourseController : Controller
     {
-        private CourseService _courseService;
+        private ICourseService _courseService;
 
-        public CourseController()
+        public CourseController(ICourseService courseService)
         {
-            _courseService = new CourseService();
+            _courseService = courseService;
         }
 
         public ActionResult Details(int id)

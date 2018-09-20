@@ -1,5 +1,6 @@
 ﻿using MiniLearningSystem.Models.ViewModels.Admin;
 using MiniLearningSystem.Services;
+using MiniLearningSystem.Services.Interfaces;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -10,13 +11,13 @@ namespace MiniLearningSystem.Web.Controllers
         private const string SetRoleSuccessMessage = "You successfuly set {0} role to {1}!";
         private const string SetRoleErrorMessage = "Something went wrong! Please try again.";
 
-        private AdminService _adminService;
-        private AccountService _accountService;
+        private IAdminService _adminService;
+        private IAccountService _accountService;
 
-        public AdminController()
+        public AdminController(IAdminService adminService, IAccountService accountService)
         {
-            _adminService = new AdminService();
-            _accountService = new AccountService();
+            _adminService = adminService;
+            _accountService = accountService;
         }
 
         public ActionResult SetRole()

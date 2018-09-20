@@ -3,10 +3,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MiniLearningSystem.Models.EntityModels;
 using MiniLearningSystem.Models.ViewModels.Admin;
+using MiniLearningSystem.Services.Interfaces;
 
 namespace MiniLearningSystem.Services
 {
-    public class AdminService : Service
+    public class AdminService : Service, IAdminService
     {
         public (bool success, string username) SetRole(SetRoleVm model)
         {

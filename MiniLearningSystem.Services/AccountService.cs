@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using MiniLearningSystem.Models.EntityModels;
+using MiniLearningSystem.Services.Interfaces;
 
 namespace MiniLearningSystem.Services
 {
-    public class AccountService : Service
+    public class AccountService : Service, IAccountService
     {
         public bool RegisterStudent(string userId)
         {

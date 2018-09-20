@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MiniLearningSystem.Models.EntityModels;
 using MiniLearningSystem.Models.ViewModels.Account;
-using MiniLearningSystem.Services;
+using MiniLearningSystem.Services.Interfaces;
 
 namespace MiniLearningSystem.Controllers
 {
@@ -16,15 +16,18 @@ namespace MiniLearningSystem.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private AccountService _service;
+        private IAccountService _service;
 
         public AccountController()
         {
-            _service = new AccountService();
+        }
+
+        public AccountController(IAccountService accountService)
+        {
+            _service = accountService;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-            : this()
         {
             UserManager = userManager;
             SignInManager = signInManager;

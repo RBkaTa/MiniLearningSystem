@@ -6,10 +6,11 @@ using MiniLearningSystem.Models.ViewModels.Course;
 using System;
 using System.Web;
 using AutoMapper;
+using MiniLearningSystem.Services.Interfaces;
 
 namespace MiniLearningSystem.Services
 {
-    public class CourseService : Service
+    public class CourseService : Service, ICourseService
     {
         public ICollection<Course> GetAll()
         {
