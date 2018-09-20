@@ -1,0 +1,56 @@
+﻿@model MiniLearningSystem.Models.ViewModels.Admin.SetRoleVm
+@{
+    ViewBag.Title = "SetRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Set Role To User</h2>
+
+@if (ViewData["Success"] != null)
+{
+    <div class="alert alert-success" id="Success" role="alert">
+        @ViewData["Success"]
+    </div>
+}
+
+@if (ViewData["Error"] != null)
+{
+    <div class="alert alert-danger" id="Error" role="alert">
+        @ViewData["Error"]
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            @using (Html.BeginForm("SetRole", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
+            {
+                @Html.AntiForgeryToken()
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Role, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetValues(typeof(MiniLearningSystem.Models.Enums.SetRole))), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.Username, new SelectList(ViewBag.Users), new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Set Role" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to Home", "Index", "Home")
+</div>

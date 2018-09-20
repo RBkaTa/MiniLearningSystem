@@ -1,13 +1,13 @@
-﻿namespace MiniLearningSystem.Data.Migrations
-{
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-    using MiniLearningSystem.Models.EntityModels;
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using MiniLearningSystem.Models.EntityModels;
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
 
+namespace MiniLearningSystem.Data.Migrations
+{
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()

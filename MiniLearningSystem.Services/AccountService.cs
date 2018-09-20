@@ -1,4 +1,7 @@
-﻿using MiniLearningSystem.Models.EntityModels;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using MiniLearningSystem.Models.EntityModels;
 
 namespace MiniLearningSystem.Services
 {
@@ -20,6 +23,14 @@ namespace MiniLearningSystem.Services
             }
 
             return success;
+        }
+
+        public ICollection<ApplicationUser> GetAll()
+        {
+            using (this.Context)
+            {
+                return this.Context.Users.ToList();
+            }
         }
     }
 }

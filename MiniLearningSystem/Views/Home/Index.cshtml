@@ -2,8 +2,10 @@
 @model IEnumerable<CourseIndexVm>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
@@ -27,7 +29,6 @@
         @TempData["CourseCreated"]
     </div>
 }
-
 
 @if (this.Context.User.IsInRole("Admin"))
 {
