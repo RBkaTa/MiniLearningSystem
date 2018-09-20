@@ -27,9 +27,9 @@ namespace MiniLearningSystem
                 cfg.CreateMap<CourseIndexVm, Course>();
                 cfg.CreateMap<Course, CourseIndexVm>();
 
-            //    cfg.CreateMap<Course, CourseInfoViewModel>()
-            //        .ForMember(p => p.StudentsCount, opt => opt.MapFrom(src => src.Students.Count))
-            //        .ForMember(p => p.TrainerName, opt => opt.MapFrom(src => src.Trainer.Name));
+                cfg.CreateMap<Course, CourseDetailsVm>()
+                    .ForMember(p => p.StudentsCount, opt => opt.MapFrom(src => src.Students.Count))
+                    .ForMember(p => p.TrainerName, opt => opt.MapFrom(src => src.Trainer.Name));
             });
         }
     }

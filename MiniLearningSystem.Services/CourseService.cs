@@ -19,6 +19,14 @@ namespace MiniLearningSystem.Services
             }
         }
 
+        public Course GetById(int id)
+        {
+            using (this.Context)
+            {
+                return this.Context.Courses.Include(c => c.Trainer).Include(c => c.Students).FirstOrDefault(c => c.Id == id);
+            }
+        }
+
         public IList<CourseIndexVm> SetApplyedCourses()
         {
 

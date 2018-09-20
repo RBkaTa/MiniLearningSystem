@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MiniLearningSystem.Models.ViewModels.Course
 {
-    public class CourseIndexVm
+    public class CourseDetailsVm
     {
         public int Id { get; set; }
 
@@ -16,7 +16,13 @@ namespace MiniLearningSystem.Models.ViewModels.Course
 
         [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
-        
+
+        [Display(Name = "Trainer")]
+        public string TrainerName { get; set; }
+
+        [Display(Name = "Students enrolled")]
+        public int StudentsCount { get; set; }
+
         public bool IsApplyed { get; set; }
     }
 }
