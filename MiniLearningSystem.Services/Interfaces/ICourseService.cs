@@ -10,6 +10,8 @@ namespace MiniLearningSystem.Services.Interfaces
 
         Course GetById(int id);
 
+        bool Create(CreateCourseVm model);
+
         IList<CourseIndexVm> SetApplyedCourses();
 
         void SetIcons(IList<CourseIndexVm> courses);

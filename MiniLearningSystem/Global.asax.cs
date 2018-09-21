@@ -24,9 +24,9 @@ namespace MiniLearningSystem
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<CourseIndexVm, Course>();
                 cfg.CreateMap<Course, CourseIndexVm>();
-
+                cfg.CreateMap<CreateCourseVm, Course>();
+                
                 cfg.CreateMap<Course, CourseDetailsVm>()
                     .ForMember(p => p.StudentsCount, opt => opt.MapFrom(src => src.Students.Count))
                     .ForMember(p => p.TrainerName, opt => opt.MapFrom(src => src.Trainer.Name));

@@ -94,7 +94,7 @@
 @if (this.Context.User.IsInRole("Admin"))
 {
 
-    @Html.ActionLink("Create New", "CreateCourse", "Admin", null, new { @class = "btn btn-lg btn-warning", style = "color:black; margin-bottom:14px;" })
+    @Html.ActionLink("Create New", "CreateCourse", "Course", null, new { @class = "btn btn-lg btn-warning", style = "color:black; margin-bottom:14px;" })
 }
 
 @if (Model is null)

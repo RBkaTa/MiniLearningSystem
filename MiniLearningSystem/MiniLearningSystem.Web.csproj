@@ -231,9 +231,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Library\.Net.jpg" />
     <Content Include="Library\computer-hacking-during-divorce_600x400.jpeg" />
+    <Content Include="Library\cSharp.jpg" />
+    <Content Include="Library\html.png" />
     <Content Include="Library\outdated-java-windows-10.jpg" />
     <Content Include="Library\php-7-up-and-running.jpg" />
+    <Content Include="Library\Python.png" />
+    <Content Include="Library\Ruby.png" />
+    <Content Include="Library\SQL.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -287,6 +293,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Course\Details.cshtml" />
     <Content Include="Views\Admin\SetRole.cshtml" />
+    <Content Include="Views\Course\CreateCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
