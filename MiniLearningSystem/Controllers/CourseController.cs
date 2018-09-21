@@ -17,7 +17,7 @@ namespace MiniLearningSystem.Web.Controllers
 
         public ActionResult Details(int id)
         {
-            var course = Mapper.Map<Course,CourseDetailsVm>(_courseService.GetById(id));
+            var course = Mapper.Map<Course, CourseDetailsVm>(_courseService.GetById(id));
 
             return View(course);
         }
@@ -58,6 +58,21 @@ namespace MiniLearningSystem.Web.Controllers
             TempData["Success"] = $"You successfuly apply for {added.courseName}";
 
             return RedirectToAction("Details", "Course", new { id = courseId });
+        }
+
+        public ActionResult RemoveStudent(int courseId)
+        {
+            var removed = _courseService.RemoveStudent(courseId);
+
+            if (!removed.success)
+            {
+                ViewData["Error"] = "Something went wrong! Please try again.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            TempData["Error"] = $"You successfuly removed {removed.courseName} from your courses!";
+
+            return RedirectToAction("Details", new { id = courseId });
         }
     }
 }

@@ -17,5 +17,7 @@ namespace MiniLearningSystem.Services.Interfaces
         void SetIcons(IList<CourseIndexVm> courses);
 
         (bool success, string courseName) AddStudent(int courseId);
+
+        (bool success, string courseName) RemoveStudent(int courseId);
     }
 }

@@ -6,6 +6,7 @@ using MiniLearningSystem.Models.ViewModels.Course;
 using System.Web;
 using AutoMapper;
 using MiniLearningSystem.Services.Interfaces;
+using System;
 
 namespace MiniLearningSystem.Services
 {
@@ -63,6 +64,33 @@ namespace MiniLearningSystem.Services
             using (this.Context)
             {
                 return this.Context.Courses.Include(c => c.Trainer).Include(c => c.Students).FirstOrDefault(c => c.Id == id);
+            }
+        }
+
+        public (bool success, string courseName) RemoveStudent(int courseId)
+        {
+            bool success;
+
+            using (this.Context)
+            {
+                var user = this.GetCurrentStudentInfo();
+                var course = this.Context.Courses.SingleOrDefault(c => c.Id == courseId);
+
+                try
+                {
+                    course.Students.Remove(user);
+                    user.Courses.Remove(course);
+
+                    this.Context.SaveChanges();
+                    success = true;
+                }
+                catch (Exception)
+                {
+                    success = false;
+                }
+
+
+                return (success, course.Name);
             }
         }
 
