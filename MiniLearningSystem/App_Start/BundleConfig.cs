@@ -22,6 +22,7 @@ namespace MiniLearningSystem
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/customJs").Include(
+                      "~/Scripts/datePicker.js",
                       "~/Scripts/resultMessages.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
