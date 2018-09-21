@@ -3,7 +3,6 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using MiniLearningSystem.Models.ViewModels.Course;
-using System;
 using System.Web;
 using AutoMapper;
 using MiniLearningSystem.Services.Interfaces;
@@ -12,6 +11,28 @@ namespace MiniLearningSystem.Services
 {
     public class CourseService : Service, ICourseService
     {
+        public (bool success, string courseName) AddStudent(int courseId)
+        {
+            var success = false;
+
+            using (this.Context)
+            {
+                var user = this.GetCurrentStudentInfo();
+
+                var course = this.Context.Courses.SingleOrDefault(c => c.Id == courseId);
+                course.Students.Add(user);
+
+                user.Courses.Add(course);
+
+                this.Context.SaveChanges();
+
+                success = true;
+
+                return (success, course.Name);
+            }
+
+        }
+
         public bool Create(CreateCourseVm model)
         {
             var success = false;

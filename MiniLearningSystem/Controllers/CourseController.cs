@@ -44,5 +44,20 @@ namespace MiniLearningSystem.Web.Controllers
             TempData["CourseCreated"] = "Successfuly created course!";
             return RedirectToAction("Index", "Home", new { area = "" });
         }
+
+        public ActionResult AddStudent(int courseId)
+        {
+            var added = _courseService.AddStudent(courseId);
+
+            if (!added.success)
+            {
+                ViewData["Error"] = "Something went wrong! Please try again.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            TempData["Success"] = $"You successfuly apply for {added.courseName}";
+
+            return RedirectToAction("Details", "Course", new { id = courseId });
+        }
     }
 }
