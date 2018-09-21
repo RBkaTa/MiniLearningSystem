@@ -32,6 +32,8 @@ namespace MiniLearningSystem.Controllers
 
             }
 
+            _courseService.SetIcons(courses);
+
             return View(courses);
         }
 

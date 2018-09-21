@@ -88,9 +88,7 @@
     @if (this.User.IsInRole("Admin"))
     {
         <div>
-            <button type="button" class="btn btn-info" style="margin-bottom:4px">
-                @Html.ActionLink("Set Role To User", "SetRole", "Admin", null, new { style = "color:black;" })
-            </button>
+            @Html.ActionLink("Set Role To User", "SetRole", "Admin", null, new { @class = "btn btn-lg btn-info", style = "color:black;" })
         </div>
     }
 </div>

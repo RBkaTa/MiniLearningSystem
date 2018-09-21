@@ -231,6 +231,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Library\computer-hacking-during-divorce_600x400.jpeg" />
+    <Content Include="Library\outdated-java-windows-10.jpg" />
+    <Content Include="Library\php-7-up-and-running.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">

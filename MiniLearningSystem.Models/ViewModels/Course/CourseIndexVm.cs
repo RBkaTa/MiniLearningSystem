@@ -18,5 +18,7 @@ namespace MiniLearningSystem.Models.ViewModels.Course
         public DateTime EndDate { get; set; }
         
         public bool IsApplyed { get; set; }
+
+        public string IconUrl { get; set; }
     }
 }
