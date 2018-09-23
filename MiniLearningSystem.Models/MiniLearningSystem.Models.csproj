@@ -112,6 +112,7 @@
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Admin\SetRoleVm.cs" />
+    <Compile Include="ViewModels\Admin\SetTrainerVm.cs" />
     <Compile Include="ViewModels\Course\CourseDetailsVm.cs" />
     <Compile Include="ViewModels\Course\CourseIndexVm.cs" />
     <Compile Include="ViewModels\Course\CreateCourseVm.cs" />

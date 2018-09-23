@@ -8,5 +8,7 @@ namespace MiniLearningSystem.Services.Interfaces
         ICollection<ApplicationUser> GetAll();
 
         bool RegisterStudent(string userId);
+
+        ICollection<ApplicationUser> GetTrainers();
     }
 }

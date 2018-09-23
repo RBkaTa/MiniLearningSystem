@@ -21,7 +21,7 @@ namespace MiniLearningSystem.Web.Controllers
 
             return View(course);
         }
-
+        
         public ActionResult CreateCourse()
         {
             return View();
@@ -45,6 +45,7 @@ namespace MiniLearningSystem.Web.Controllers
             return RedirectToAction("Index", "Home", new { area = "" });
         }
 
+        [HttpPost]
         public ActionResult AddStudent(int courseId)
         {
             var added = _courseService.AddStudent(courseId);
@@ -59,7 +60,8 @@ namespace MiniLearningSystem.Web.Controllers
 
             return RedirectToAction("Details", "Course", new { id = courseId });
         }
-
+        
+        [HttpPost]
         public ActionResult RemoveStudent(int courseId)
         {
             var removed = _courseService.RemoveStudent(courseId);

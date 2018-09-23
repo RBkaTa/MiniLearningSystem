@@ -79,20 +79,32 @@
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id, area = "" }) |*@
     @Html.ActionLink("Back to List", "Index", "Home", null, new { @class = "btn btn-lg btn-info", style = "color:black;" })
 
-    @if (User.IsInRole("Admin"))
+    @if (User.Identity.IsAuthenticated)
     {
         <br />
-        if (string.IsNullOrWhiteSpace(Model.TrainerName) && string.IsNullOrEmpty(Model.TrainerName))
+        if (!Model.IsApplyed)
         {
-            @Html.ActionLink("Add Trainer", "AssignTrainer", "Admin", new { id = Model.Id }, new { @class = "btn btn-lg btn-success", style = "color:black;" })
-
+            @Html.ActionLink("Apply", "AddStudent", "Course", new { courseId = Model.Id }, new { @class = "btn btn-lg btn-success customLeftBtn", courseId = Model.Id, style = "color:black;" })
         }
         else
         {
-            @Html.ActionLink("Change Trainer", "AssignTrainer", "Admin", new { id = Model.Id }, new { @class = "btn btn-lg btn-danger", style = "color:black;" })
-
+            @Html.ActionLink("Cancel", "RemoveStudent", "Course", new { courseId = Model.Id }, new { @class = "btn btn-lg btn-danger customLeftBtn", courseId = Model.Id, style = "color:black;" })
         }
 
-    }
+        if (User.IsInRole("Admin"))
+        {
+            <br />
+            if (string.IsNullOrWhiteSpace(Model.TrainerName) && string.IsNullOrEmpty(Model.TrainerName))
+            {
+                @Html.ActionLink("Add Trainer", "AssignTrainer", "Admin", null, new { @class = "btn btn-lg btn-success", style = "color:black;" })
 
+            }
+            else
+            {
+                @Html.ActionLink("Change Trainer", "SetTrainer", "Admin", null, new { @class = "btn btn-lg btn-danger", style = "color:black;" })
+
+            }
+
+        }
+    }
 </p>

@@ -13,11 +13,13 @@ namespace MiniLearningSystem.Web.Controllers
 
         private IAdminService _adminService;
         private IAccountService _accountService;
+        private ICourseService _courseService;
 
-        public AdminController(IAdminService adminService, IAccountService accountService)
+        public AdminController(IAdminService adminService, IAccountService accountService, ICourseService courseService)
         {
             _adminService = adminService;
             _accountService = accountService;
+            _courseService = courseService;
         }
 
         public ActionResult SetRole()
@@ -46,6 +48,37 @@ namespace MiniLearningSystem.Web.Controllers
             }
 
             ViewData["Success"] = string.Format(SetRoleSuccessMessage, model.Role.ToString(), success.username);
+            return View();
+        }
+
+        public ActionResult SetTrainer()
+        {
+            ViewBag.Courses = _courseService.GetAll();
+            ViewBag.Trainers = _accountService.GetTrainers();
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SetTrainer(SetTrainerVm model)
+        {
+            ViewBag.Courses = _courseService.GetAll();
+            ViewBag.Trainers = _accountService.GetTrainers();
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var assigned = _adminService.SetTrainer(model);
+
+            if (!assigned.success)
+            {
+                ViewData["Error"] = "Something went wrong! Please try again.";
+                return View();
+            }
+
+            ViewData["Success"] = $"You successfuly assigned {assigned.trainer} as trainer for {assigned.course} course";
             return View();
         }
     }
