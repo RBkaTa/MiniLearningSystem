@@ -19,10 +19,17 @@ namespace MiniLearningSystem.Services
                 var student = new Student();
                 student.UserId = userId;
 
-                this.Context.Students.Add(student);
-                this.Context.SaveChanges();
+                try
+                {
+                    this.Context.Students.Add(student);
+                    this.Context.SaveChanges();
 
-                success = true;
+                    success = true;
+                }
+                catch (Exception)
+                {
+                    success = false;
+                }
             }
 
             return success;

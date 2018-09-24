@@ -17,7 +17,17 @@ namespace MiniLearningSystem.Web.Controllers
 
         public ActionResult Details(int id)
         {
-            var course = Mapper.Map<Course, CourseDetailsVm>(_courseService.GetById(id));
+            CourseDetailsVm course;
+
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                course = Mapper.Map<Course,CourseDetailsVm>(_courseService.GetById(id));
+            }
+            else
+            {
+                course = _courseService.GetDetailedById(id);
+
+            }
 
             return View(course);
         }
@@ -45,7 +55,6 @@ namespace MiniLearningSystem.Web.Controllers
             return RedirectToAction("Index", "Home", new { area = "" });
         }
 
-        [HttpPost]
         public ActionResult AddStudent(int courseId)
         {
             var added = _courseService.AddStudent(courseId);
@@ -61,7 +70,6 @@ namespace MiniLearningSystem.Web.Controllers
             return RedirectToAction("Details", "Course", new { id = courseId });
         }
         
-        [HttpPost]
         public ActionResult RemoveStudent(int courseId)
         {
             var removed = _courseService.RemoveStudent(courseId);

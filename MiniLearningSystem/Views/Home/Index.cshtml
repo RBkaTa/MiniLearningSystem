@@ -141,7 +141,7 @@ else
                             }
                             else
                             {
-                                @Html.ActionLink("Cancel", "RemoveStudent", "Course", new { courseId = item.Id }, new { @class = "btn btn-lg btn-danger customLeftBtn", courseId = item.Id, style = "color:black;" })
+                                @Html.ActionLink("Cancel", "RemoveStudent", "Course", new { courseId = item.Id }, new { @class = "btn btn-lg btn-danger customLeftBtn", Id = item.Id, style = "color:black;" })
                             }
                         }
 
