@@ -16,26 +16,23 @@ namespace MiniLearningSystem.Services
         {
             var success = false;
 
-            using (this.Context)
+            var user = this.GetCurrentStudentInfo();
+            var course = this.Context.Courses.SingleOrDefault(c => c.Id == courseId);
+
+            try
             {
-                var user = this.GetCurrentStudentInfo();
-                var course = this.Context.Courses.SingleOrDefault(c => c.Id == courseId);
+                course.Students.Add(user);
+                user.Courses.Add(course);
+                this.Context.SaveChanges();
 
-                try
-                {
-                    course.Students.Add(user);
-                    user.Courses.Add(course);
-                    this.Context.SaveChanges();
-
-                    success = true;
-                }
-                catch (Exception)
-                {
-                    success = false;
-                }
-
-                return (success, course.Name);
+                success = true;
             }
+            catch (Exception)
+            {
+                success = false;
+            }
+
+            return (success, course.Name);
 
         }
 
@@ -45,50 +42,38 @@ namespace MiniLearningSystem.Services
 
             var course = Mapper.Map<Course>(model);
 
-            using (this.Context)
+            try
             {
-                try
-                {
-                    this.Context.Courses.Add(course);
-                    this.Context.SaveChanges();
+                this.Context.Courses.Add(course);
+                this.Context.SaveChanges();
 
-                    success = true;
-                }
-                catch (Exception)
-                {
-                    success = false;
-                }
-
-                return success;
+                success = true;
             }
+            catch (Exception)
+            {
+                success = false;
+            }
+
+            return success;
         }
 
         public ICollection<Course> GetAll()
         {
-            using (this.Context)
-            {
-                return this.Context.Courses.Include(c => c.Trainer).Include(c => c.Students).ToList();
-            }
+            return this.Context.Courses.Include(c => c.Trainer).Include(c => c.Students).ToList();
         }
 
         public Course GetById(int id)
         {
-            using (this.Context)
-            {
-                return this.Context.Courses.Include(c => c.Trainer).Include(c => c.Students).FirstOrDefault(c => c.Id == id);
-            }
+            return this.Context.Courses.Include(c => c.Trainer).Include(c => c.Students).FirstOrDefault(c => c.Id == id);
         }
 
         public CourseDetailsVm GetDetailedById(int id)
         {
-            using (this.Context)
-            {
-                var course = Mapper.Map<Course, CourseDetailsVm>(this.Context.Courses.Include(c => c.Trainer).Include(c => c.Students).FirstOrDefault(c => c.Id == id));
+            var course = Mapper.Map<Course, CourseDetailsVm>(this.Context.Courses.Include(c => c.Trainer).Include(c => c.Students).FirstOrDefault(c => c.Id == id));
 
-                course.IsApplyed = IsCourseApplied(id);
+            course.IsApplyed = IsCourseApplied(id);
 
-                return course;
-            }
+            return course;
         }
 
         public (bool success, string courseName) RemoveStudent(int courseId)
@@ -96,26 +81,23 @@ namespace MiniLearningSystem.Services
             bool success;
             var user = this.GetCurrentStudentInfo();
 
-            using (this.Context)
+            var course = this.Context.Courses.SingleOrDefault(c => c.Id == courseId);
+
+            try
             {
-                var course = this.Context.Courses.SingleOrDefault(c => c.Id == courseId);
+                course.Students.Remove(user);
+                user.Courses.Remove(course);
 
-                try
-                {
-                    course.Students.Remove(user);
-                    user.Courses.Remove(course);
-
-                    this.Context.SaveChanges();
-                    success = true;
-                }
-                catch (Exception)
-                {
-                    success = false;
-                }
-
-
-                return (success, course.Name);
+                this.Context.SaveChanges();
+                success = true;
             }
+            catch (Exception)
+            {
+                success = false;
+            }
+
+
+            return (success, course.Name);
         }
 
         public bool IsCourseApplied(int id)
@@ -124,34 +106,28 @@ namespace MiniLearningSystem.Services
 
             var student = this.GetCurrentStudentInfo();
 
-            using (this.Context)
+            if (student.Courses.Any(c => c.Id == id))
             {
-                if (student.Courses.Any(c => c.Id == id))
-                {
-                    succes = true;
-                }
-
-                return succes;
+                succes = true;
             }
+
+            return succes;
         }
 
         public IList<CourseIndexVm> SetApplyedCourses()
         {
             var userName = HttpContext.Current.User.Identity.Name;
 
-            using (this.Context)
+            var courses = Mapper.Map<ICollection<Course>, IList<CourseIndexVm>>(this.Context.Courses.Include(c => c.Trainer).Include(c => c.Students).ToList());
+
+            var student = this.Context.Students.Include(s => s.Courses).Include(s => s.User).SingleOrDefault(s => s.User.UserName == userName);
+
+            for (int i = 0; i < courses.Count; i++)
             {
-                var courses = Mapper.Map<ICollection<Course>, IList<CourseIndexVm>>(this.Context.Courses.Include(c => c.Trainer).Include(c => c.Students).ToList());
-
-                var student = this.Context.Students.Include(s => s.Courses).Include(s => s.User).SingleOrDefault(s => s.User.UserName == userName);
-
-                for (int i = 0; i < courses.Count; i++)
-                {
-                    courses[i].IsApplyed = student.Courses.Any(c => c.Id == courses[i].Id);
-                }
-
-                return courses;
+                courses[i].IsApplyed = student.Courses.Any(c => c.Id == courses[i].Id);
             }
+
+            return courses;
         }
 
         public void SetIcons(IList<CourseIndexVm> courses)

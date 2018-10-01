@@ -14,22 +14,19 @@ namespace MiniLearningSystem.Services
         {
             var success = false;
 
-            using (this.Context)
+            var student = new Student();
+            student.UserId = userId;
+
+            try
             {
-                var student = new Student();
-                student.UserId = userId;
+                this.Context.Students.Add(student);
+                this.Context.SaveChanges();
 
-                try
-                {
-                    this.Context.Students.Add(student);
-                    this.Context.SaveChanges();
-
-                    success = true;
-                }
-                catch (Exception)
-                {
-                    success = false;
-                }
+                success = true;
+            }
+            catch (Exception)
+            {
+                success = false;
             }
 
             return success;
@@ -37,23 +34,17 @@ namespace MiniLearningSystem.Services
 
         public ICollection<ApplicationUser> GetAll()
         {
-            using (this.Context)
-            {
-                return this.Context.Users.ToList();
-            }
+            return this.Context.Users.ToList();
         }
 
         public ICollection<ApplicationUser> GetTrainers()
         {
-            using (this.Context)
-            {
-                var store = new UserStore<ApplicationUser>(this.Context);
-                var manager = new UserManager<ApplicationUser>(store);
+            var store = new UserStore<ApplicationUser>(this.Context);
+            var manager = new UserManager<ApplicationUser>(store);
 
-                var trainerRoleId = this.Context.Roles.SingleOrDefault(u => u.Name == "Trainer").Id;
+            var trainerRoleId = this.Context.Roles.SingleOrDefault(u => u.Name == "Trainer").Id;
 
-                return this.Context.Users.Where(u => u.Roles.Any(r => r.RoleId == trainerRoleId)).ToList();
-            }
+            return this.Context.Users.Where(u => u.Roles.Any(r => r.RoleId == trainerRoleId)).ToList();
         }
     }
 }

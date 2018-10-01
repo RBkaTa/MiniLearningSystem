@@ -25,8 +25,9 @@ namespace MiniLearningSystem.Web.Controllers
             }
             else
             {
-                course = _courseService.GetDetailedById(id);
-
+                //course = _courseService.GetDetailedById(id);
+                course = Mapper.Map<Course, CourseDetailsVm>(_courseService.GetById(id));
+                course.IsApplyed = _courseService.IsCourseApplied(id);
             }
 
             return View(course);

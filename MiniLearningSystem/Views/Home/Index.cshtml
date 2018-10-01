@@ -66,12 +66,17 @@
         width: 100%;
         padding: 20px;
         z-index: 0;
-        box-decoration-break
     }
 
     .customLeftBtn {
         position: absolute;
         left: 90px;
+        bottom: 10px;
+    }
+
+    .customCenterBtn {
+        position:absolute;
+        left:140px;
         bottom: 10px;
     }
 
@@ -143,9 +148,13 @@ else
                             {
                                 @Html.ActionLink("Cancel", "RemoveStudent", "Course", new { courseId = item.Id }, new { @class = "btn btn-lg btn-danger customLeftBtn", Id = item.Id, style = "color:black;" })
                             }
-                        }
 
-                        @Html.ActionLink("Details", "Details", "Course", new { id = item.Id }, new { @class = "btn btn-lg btn-info customRightBtn", id = item.Id, style = "color:black;" })
+                            @Html.ActionLink("Details", "Details", "Course", new { id = item.Id }, new { @class = "btn btn-lg btn-info customRightBtn", id = item.Id, style = "color:black;" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Details", "Details", "Course", new { id = item.Id }, new { @class = "btn btn-lg btn-info customCenterBtn", id = item.Id, style = "color:black;" })
+                        }
                     </div>
                 </div>
             }

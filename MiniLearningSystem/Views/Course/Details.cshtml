@@ -8,8 +8,6 @@
 <h2>Info</h2>
 
 <div>
-    <hr />
-
     @if (TempData["Success"] != null)
     {
         <div class="alert alert-success" id="Success" role="alert">
@@ -24,15 +22,10 @@
         </div>
     }
 
+    <h3>@Model.Name</h3>
+    <hr />
+
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
@@ -62,7 +55,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TrainerName)
+            @Html.ActionLink(Model.TrainerName, "", "")
+            @*@Html.DisplayFor(model => model.TrainerName)*@
         </dd>
 
         <dt>
@@ -75,36 +69,48 @@
 
     </dl>
 </div>
-<p>
+
+<div style="display:normal; margin-bottom: 80px;">
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        if (string.IsNullOrWhiteSpace(Model.TrainerName) && string.IsNullOrEmpty(Model.TrainerName))
+        {
+            <div class="z-depth-4" style="float:right; position:relative;  border:1px solid black; border-radius:20px; padding:8px;">
+                <h5 style="text-align:center;">Admin Panel</h5>
+                <hr />
+                @Html.ActionLink("Add Trainer", "SetTrainer", "Admin", null, new { @class = "btn btn-lg btn-success", style = "color:black;" })
+            </div>
+        }
+        else
+        {
+            <div style="float:right; position:relative;  border:1px solid black; border-radius:20px; padding:8px;">
+                <h5 style="text-align:center;">Admin Panel</h5>
+                <hr />
+                @Html.ActionLink("Change Trainer", "SetTrainer", "Admin", null, new { @class = "btn btn-lg btn-danger", style = "color:black;" })
+            </div>
+        }
+    }
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id, area = "" }) |*@
+
     @Html.ActionLink("Back to List", "Index", "Home", null, new { @class = "btn btn-lg btn-info", style = "color:black;" })
 
+    <br />
     @if (User.Identity.IsAuthenticated)
     {
         <br />
         if (!Model.IsApplyed)
         {
-            @Html.ActionLink("Apply", "AddStudent", "Course", new { courseId = Model.Id }, new { @class = "btn btn-lg btn-success customLeftBtn", courseId = Model.Id, style = "color:black;" })
+            <div style="float:left; position:relative;">
+                @Html.ActionLink("Apply", "AddStudent", "Course", new { courseId = Model.Id }, new { @class = "btn btn-lg btn-success", courseId = Model.Id, style = "color:black;" })
+            </div>
         }
         else
         {
-            @Html.ActionLink("Cancel", "RemoveStudent", "Course", new { courseId = Model.Id }, new { @class = "btn btn-lg btn-danger customLeftBtn", courseId = Model.Id, style = "color:black;" })
-        }
-
-        if (User.IsInRole("Admin"))
-        {
-            <br />
-            if (string.IsNullOrWhiteSpace(Model.TrainerName) && string.IsNullOrEmpty(Model.TrainerName))
-            {
-                @Html.ActionLink("Add Trainer", "AssignTrainer", "Admin", null, new { @class = "btn btn-lg btn-success", style = "color:black;" })
-
-            }
-            else
-            {
-                @Html.ActionLink("Change Trainer", "SetTrainer", "Admin", null, new { @class = "btn btn-lg btn-danger", style = "color:black;" })
-
-            }
-
+            <div style="float:left; position:relative;">
+                @Html.ActionLink("Cancel", "RemoveStudent", "Course", new { courseId = Model.Id }, new { @class = "btn btn-lg btn-danger", courseId = Model.Id, style = "color:black;" })
+            </div>
         }
     }
-</p>
+
+
+</div>
