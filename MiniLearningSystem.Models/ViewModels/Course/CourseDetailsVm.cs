@@ -17,6 +17,8 @@ namespace MiniLearningSystem.Models.ViewModels.Course
         [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
 
+        public string TrainerId { get; set; }
+
         [Display(Name = "Trainer")]
         public string TrainerName { get; set; }
 

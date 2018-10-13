@@ -18,6 +18,8 @@ namespace MiniLearningSystem.Data
 
         public DbSet<Article> Articles { get; set; }
 
+        public DbSet<Connection> Connections { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

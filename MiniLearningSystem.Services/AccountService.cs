@@ -37,6 +37,11 @@ namespace MiniLearningSystem.Services
             return this.Context.Users.ToList();
         }
 
+        public ApplicationUser GetById(string id)
+        {
+            return this.Context.Users.Find(id);
+        }
+
         public ICollection<ApplicationUser> GetTrainers()
         {
             var store = new UserStore<ApplicationUser>(this.Context);
@@ -45,6 +50,11 @@ namespace MiniLearningSystem.Services
             var trainerRoleId = this.Context.Roles.SingleOrDefault(u => u.Name == "Trainer").Id;
 
             return this.Context.Users.Where(u => u.Roles.Any(r => r.RoleId == trainerRoleId)).ToList();
+        }
+
+        public ApplicationUser GetByName(string name)
+        {
+            return this.Context.Users.SingleOrDefault(u => u.UserName == name);
         }
     }
 }

@@ -1,7 +1,8 @@
-﻿using Microsoft.Owin;
+﻿using Microsoft.AspNet.SignalR;
+using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(MiniLearningSystem.Startup))]
+[assembly: OwinStartup(typeof(MiniLearningSystem.Startup))]
 namespace MiniLearningSystem
 {
     public partial class Startup
@@ -9,6 +10,7 @@ namespace MiniLearningSystem
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            app.MapSignalR();
         }
     }
 }

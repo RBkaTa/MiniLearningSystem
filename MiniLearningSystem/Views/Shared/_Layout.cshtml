@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/chat")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -39,6 +40,14 @@
         </footer>
     </div>
 
+    <div id="chat-popup" onload="" style="position: fixed; bottom:0px;">
+
+    </div>
+
+    <div id="users" style=" position: fixed; bottom: 0px; right: 0; ">
+        @Html.Partial("UserList", Session["user-list"])
+    </div>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/modernizr")
@@ -47,6 +56,7 @@
             crossorigin="anonymous"></script>
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/customJs")
+    @Scripts.Render("~/bundles/chat")
     @RenderSection("scripts", required: false)
 </body>
 </html>

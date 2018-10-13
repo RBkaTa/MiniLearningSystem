@@ -7,6 +7,9 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
+            <img id="notification" src="https://png.icons8.com/linen/50/000000/topic-push-notification.png" style="display:none; margin-top:7px" width="35" height="35" alt="Alternate Text" />
+        </li>
+        <li>
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>

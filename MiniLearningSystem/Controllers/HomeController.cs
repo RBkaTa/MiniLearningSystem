@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MiniLearningSystem.Models.EntityModels;
+using MiniLearningSystem.Models.ViewModels;
+using MiniLearningSystem.Models.ViewModels.Chat;
 using MiniLearningSystem.Models.ViewModels.Course;
-using MiniLearningSystem.Services;
 using MiniLearningSystem.Services.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace MiniLearningSystem.Controllers
@@ -12,14 +12,21 @@ namespace MiniLearningSystem.Controllers
     public class HomeController : Controller
     {
         private ICourseService _courseService;
+        private IAccountService _accountService;
 
-        public HomeController(ICourseService courseService)
+        public HomeController(ICourseService courseService, IAccountService accountService)
         {
             _courseService = courseService;
+            _accountService = accountService;
         }
 
         public ActionResult Index()
         {
+            var users = new UserListVm();
+            users.Users = Mapper.Map<ICollection<ApplicationUser>, IList<UserListDetailsVm>>(_accountService.GetAll());
+
+            HttpContext.Session["user-list"] = users;
+
             IList<CourseIndexVm> courses = null;
 
             if (this.User.Identity.IsAuthenticated)
@@ -49,6 +56,19 @@ namespace MiniLearningSystem.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Chat(string id)
+        {
+            var sender = _accountService.GetById(id);
+
+            var model = new ChatVm()
+            {
+                Id = sender.Id,
+                SenderName = sender.UserName,
+            };
+
+            return PartialView(model);
         }
     }
 }

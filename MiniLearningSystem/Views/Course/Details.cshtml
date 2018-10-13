@@ -55,7 +55,13 @@
         </dt>
 
         <dd>
-            @Html.ActionLink(Model.TrainerName, "", "")
+            @if (Model.TrainerName != null)
+            {
+                <input id="trainer-chat" type="button" style="margin:2px;" value="@Model.TrainerName" />
+                //@Ajax.ActionLink(Model.TrainerName,"Chat","Home", new { id = Model.TrainerId }, new AjaxOptions { UpdateTargetId = "chat-popup" })
+                //@Html.ActionLink(Model.TrainerName, "Chat", "Home", new { id = Model.TrainerId }, null)
+            }
+
             @*@Html.DisplayFor(model => model.TrainerName)*@
         </dd>
 
@@ -111,6 +117,20 @@
             </div>
         }
     }
-
-
 </div>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+    (function () {
+        $('#trainer-chat').click(function () {
+            $.ajax({
+                url: '/Home/Chat',
+                data: { Id: '@Model.TrainerId' },
+                success: function (res) {
+                    $('#chat-popup').html(res);
+                }
+            });
+        });
+    }());
+
+</script>

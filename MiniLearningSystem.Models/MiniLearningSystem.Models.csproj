@@ -98,10 +98,14 @@
   <ItemGroup>
     <Compile Include="EntityModels\ApplicationUser.cs" />
     <Compile Include="EntityModels\Article.cs" />
+    <Compile Include="EntityModels\Chat.cs" />
+    <Compile Include="EntityModels\Connection.cs" />
     <Compile Include="EntityModels\Course.cs" />
+    <Compile Include="EntityModels\Message.cs" />
     <Compile Include="EntityModels\Student.cs" />
     <Compile Include="Enums\SetRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Chat\ChatVm.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
@@ -113,6 +117,7 @@
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Admin\SetRoleVm.cs" />
     <Compile Include="ViewModels\Admin\SetTrainerVm.cs" />
+    <Compile Include="ViewModels\Chat\MessageVm.cs" />
     <Compile Include="ViewModels\Course\CourseDetailsVm.cs" />
     <Compile Include="ViewModels\Course\CourseIndexVm.cs" />
     <Compile Include="ViewModels\Course\CreateCourseVm.cs" />
@@ -124,6 +129,8 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\UserListDetailsVm.cs" />
+    <Compile Include="ViewModels\UserListVm.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

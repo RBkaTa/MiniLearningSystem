@@ -1,0 +1,65 @@
+﻿@model MiniLearningSystem.Models.ViewModels.UserListVm
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+<!------ Include the above in your HEAD tag ---------->
+<div class="container" id="usersPopup" style="float:right">
+    <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading" id="accordion" style="text-align:center;" onclick="minimizeUsers()">
+                    <span class="glyphicon glyphicon-comment"></span>
+                    <span id="sender-name" style="text-align:center">Users</span>
+                    <div class="btn-group pull-right">
+                    </div>
+                </div>
+                <div class="panel-collapse collapse" id="collapseUsers">
+                    <div class="panel-body">
+                        <ul class="chat">
+                            @foreach (var user in Model.Users)
+                            {
+                                <li class="left clearfix">
+                                    <div class="contenS">
+                                        <a>
+                                            <input id="trainer-chat" type="button" onclick="selectUser('@user.Id')" value="@user.Name" style="font-weight:bolder; align-content:center; border:1px solid white;" />
+                                            @*<p style="font-weight:bolder; align-content:center; border:1px solid white; padding:15px; border-radius:20px; margin:12px;"> @user.Name </p>*@
+                                        </a>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <input id="search" type="text" class="form-control input-sm" placeholder="Type username here" />
+                            <span class="input-group-btn">
+                                @*<input type="button" value="Search" id="search-user" />*@
+
+                                <button class="btn btn-warning btn-sm" id="user-search">
+                                    Search
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    function selectUser(id) {
+        $.ajax({
+            url: '/Home/Chat',
+            data: { Id: id },
+            success: function (res) {
+                $('#chat-popup').html(res);
+            }
+        });
+    }
+</script>
